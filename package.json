@@ -1,0 +1,44 @@
+{
+  "name": "tinypng",
+  "description": "The best project ever.",
+  "version": "0.1.0",
+  "homepage": "https://github.com/manuelvanrijn/node-tinypng",
+  "author": {
+    "name": "Manuel van Rijn",
+    "email": "manuel@manuelles.nl",
+    "url": "http://manuel.manuelles.nl"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git://github.com/manuelvanrijn/node-tinypng.git"
+  },
+  "bugs": {
+    "url": "https://github.com/manuelvanrijn/node-tinypng/issues"
+  },
+  "licenses": [
+    {
+      "type": "MIT",
+      "url": "https://github.com/manuelvanrijn/node-tinypng/blob/master/LICENSE-MIT"
+    }
+  ],
+  "main": "./index",
+  "engines": {
+    "node": ">=0.6"
+  },
+  "scripts": {
+    "test": "grunt test"
+  },
+  "dependencies": {
+    "request": "latest",
+    "filesize": "latest",
+    "futures": ">=2.1.0",
+    "optimist": "latest"
+  },
+  "devDependencies": {
+    "grunt": "~0.3.9"
+  },
+  "bin": {
+    "tinypng": "bin/tinypng"
+  },
+  "keywords": []
+}

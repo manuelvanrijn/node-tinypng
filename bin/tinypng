@@ -1,0 +1,132 @@
+#!/usr/bin/env node
+/*
+var
+files = [
+  //'./node_modules/grunt/node_modules/nodeunit/img/',
+  './file3.png',
+  './file2.png',
+  './file.png',
+  './bravo.png'
+];
+cli.process(files);
+*/
+
+var argv  = require('optimist').argv,
+    util  = require('util'),
+    cli = require('../lib/cli');
+
+var responses = {
+  help: function() {
+    util.puts([
+      'Usage: tinypng file1',
+      'Compress PNG images while preserving transparency. tinypng uses TinyPNG.org webservice to compress your images.',
+      '',
+      'Options:',
+      '',
+      ' General',
+      '  -v, --verbose      verbose mode',
+      '  -r, --recursive    scan folders recursivly',
+      '',
+      ' Other:',
+      '  -h, --help         print this help page',
+      '  -v, --version      print program version',
+      '',
+      ' Examples:',
+      '  Single file:',
+      '   tinypng image.png'
+    ].join('\n'));
+  },
+  version: function() {
+    util.puts('tinypng v0.1.0');
+  }
+};
+
+function respond(type) {
+  responses[type].call();
+}
+
+if(argv.help || argv.h) {
+  respond('help');
+}
+else if(argv.version) {
+  respond('version');
+}
+else if(argv._.length) {
+  var settings = {};
+
+  // if (argv.R || argv.recursive) {
+  //   settings.recursive = true;
+  // }
+
+  if (argv.v || argv.verbose) {
+    settings.verbose = true;
+  }
+
+//  smushit.smushit(argv._, settings);
+  //console.log(argv._);
+  cli.process(argv._);
+
+}
+else {
+  respond('help');
+}
+
+
+/**
+
+// HERE WE GO !!!
+
+process.stdin.resume();
+process.stdin.setEncoding('utf8');
+process.stdin.setRawMode(true);
+process.title = 'tinypng';
+
+var tinypng = require('../');
+var fs = require('fs');
+
+tinypng.shrink('file.png', function(error, result) {
+  if(!error) {
+    console.log("input size:    " + result.getInputSize());
+    console.log("output size:   " + result.getOutputSize());
+    console.log("shrinked:      " + result.getSavedPercentage() + "%");
+
+    var target = 'file_shrinked.png';
+
+    // Check if file already exists
+    if(fs.existsSync(target)) {
+      console.log('\nFile already exists. Should I overwrite it?    [Y/n]');
+
+      // Monitor input to know what to do
+      process.stdin.on('data', function (input) {
+        input = input.toString().toLowerCase().trim();
+        if (input === '\3' || input === 'q') {
+          console.log('\nExiting...');
+          process.exit();
+        }
+
+        if(input !== '' || input !== 'y') {
+          // Return or y input, so save the file
+          result.saveToDisk(target);
+          console.log('\nSaved to disk');
+          process.exit();
+        }
+        else {
+          // Wrong input, cancel saving the file
+          console.log('\nSave to disk aborted');
+          process.exit();
+        }
+      });
+    }
+    // If not just save it
+    else {
+      console.log('\nSaved to disk');
+      result.saveToDisk(target);
+      process.exit();
+    }
+  }
+  else {
+    console.error('Something went horribly wrong');
+    process.exit(1);
+  }
+});
+*/
